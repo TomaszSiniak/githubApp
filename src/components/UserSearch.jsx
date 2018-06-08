@@ -1,5 +1,5 @@
 import React from 'react';
-import { getUsers, subscribe, showSearchResult } from '../services/storage';
+import { getUsers, subscribe, showSearchResult, addUser } from '../services/storage';
 
 
 
@@ -27,8 +27,8 @@ class UserSearch extends React.Component {
           <button>Search</button>
         </form>
         {this.state.searchResult.length > 0 && <p className="result-title">Your results: </p>}
-        {this.state.searchResult.map((item, key) => {
-          return <p className="users-list-result_item" key={key}>{item.login}</p>
+        {this.state.searchResult.map((user, key) => {
+          return <p onClick={ () => addUser(user)} className="users-list-result_item" key={key}>{user.login}</p>
         })}
       </div>
     )

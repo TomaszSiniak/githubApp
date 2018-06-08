@@ -35,10 +35,8 @@ export const getUsers = (e) => {
       }
       //push created objects to array
       searchUserResult.push(result)
+      publish();
     })
-  }).then( () => {
-    console.log(searchUserResult);
-    publish()
   })
   e.target.elements.userName.value = '';
 }
@@ -50,9 +48,15 @@ export const showSearchResult = () => {
   return searchListResult;
 }
 
+export const showMyUsersList = () => {
+  let addMyUsers = [...myUsersList];
+  console.log('shoMyUserList()')
+  return addMyUsers;
+}
 
 // add user to local Database
 
-export const addUser = () => {
-  
+export const addUser = (user) => {
+    myUsersList.push(user);
+    console.log(myUsersList);
 }

@@ -13,7 +13,7 @@ export const searchUser = async (query) => {
 
 export const getUser = async (id) => {
   try{
-    const request = await fetch(`https://api.github.com/search/users?q=${id}`);
+    const request = await fetch(`https://api.github.com/users/${id}`);
     const data = await request.json();
     return data;
   } catch(err){
@@ -23,7 +23,7 @@ export const getUser = async (id) => {
 
 export const getUserRepos = async (login) => {
   try{
-    const request = await fetch(`https://api.github.com/search/users?q=${login}/repos`);
+    const request = await fetch(`https://api.github.com/users/${login}/repos`);
     const data = await request.json();
     return data;
   } catch(err){
