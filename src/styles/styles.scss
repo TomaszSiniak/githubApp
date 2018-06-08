@@ -5,6 +5,7 @@
 html{
   font-size: 62.5%;
   color: #fff;
+  font-family: 'Roboto', sans-serif;;
 }
 .wrapper {
   width: 100%;
@@ -20,7 +21,9 @@ html{
     form{
     display: flex;
     justify-content: space-between;
-    margin: 2rem 0;
+    padding-bottom: 3rem;
+    margin: 2rem 0 2rem 0;
+    border-bottom: .3rem solid #455A64;
       input{
         text-indent: .5rem;
         line-height: 3rem;
@@ -47,7 +50,22 @@ html{
           cursor: pointer;
           box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
         }
-      }
+      } 
+    }
+    .result-title{
+      font-size: 2rem;
+      font-weight: 600;
+      border-bottom: .1rem solid #455A64;
+      padding-bottom:1rem;
+      margin-bottom: 1rem;
+    }
+      .users-list-result_item{
+        font-size: 1.4rem;
+        padding: 1rem 2rem;
+        &:hover{
+          background: #455A64;
+          cursor: pointer;
+        }
     }
     .user{
       background: #546E7A;
@@ -59,7 +77,7 @@ html{
         justify-content: space-between;
         font-size: 1.6rem;
         text-align: center;
-        border-bottom: .2rem solid #455A64;
+        border-bottom: .1rem solid #455A64;
         padding-bottom: 1rem;
         button{
           border-radius: 0.5rem;

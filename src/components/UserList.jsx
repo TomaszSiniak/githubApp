@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserSearch } from './UserSearch';
+import UserSearch  from './UserSearch';
 import { User } from './User';
 
 const title = 'User List';

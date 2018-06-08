@@ -1,9 +1,37 @@
 import React from 'react';
+import { getUsers, subscribe, showSearchResult } from '../services/storage';
 
 
-export const UserSearch = () => (
-  <form>
-    <input name="userName" />
-    <button>Search</button>
-  </form>
-);
+
+class UserSearch extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchResult: []
+    }
+  }
+  componentDidMount() {
+    subscribe(() => {
+      const searchResult = showSearchResult();
+      this.setState({
+        searchResult
+      });
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <form onSubmit={(e) => getUsers(e)}>
+          <input name="userName" />
+          <button>Search</button>
+        </form>
+        {this.state.searchResult.length > 0 && <p className="result-title">Your results: </p>}
+        {this.state.searchResult.map((item, key) => {
+          return <p className="users-list-result_item" key={key}>{item.login}</p>
+        })}
+      </div>
+    )
+  }
+}
+export default UserSearch;
