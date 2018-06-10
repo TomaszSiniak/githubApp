@@ -2,7 +2,10 @@ import React from 'react';
 import UserSearch from './UserSearch';
 import { User } from './User';
 import { getUser } from '../services/api';
-import { showMyUsersList, subscribe } from '../services/storage'
+import { showMyUsersList, subscribe } from '../services/storage';
+import localForage from 'localforage';
+import {getLocalForage } from '../services/browserStorage';
+
 
 
 class UserList extends React.Component {
@@ -15,12 +18,12 @@ class UserList extends React.Component {
   componentDidMount(){
     subscribe( () => {
       const myUsers = showMyUsersList();
-      this.setState({myUsers})
-    })
+      this.setState({myUsers});
+    });
   }
   render() {
     const title = 'User List';
-    const find = 'Find user by login';
+    const find = 'Find user by name';
     return (
       <div className="container">
         <h2>{find}</h2>

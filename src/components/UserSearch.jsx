@@ -28,7 +28,7 @@ class UserSearch extends React.Component {
         </form>
         {this.state.searchResult.length > 0 && <p className="result-title">Your results: </p>}
         {this.state.searchResult.map((user, key) => {
-          return <p onClick={ () => addUser(user)} className="users-list-result_item" key={key}>{user.login}</p>
+          return <p onClick={ () => addUser(user.id)} className="users-list-result_item" key={key}>{user.login}</p>
         })}
       </div>
     )
