@@ -2,17 +2,22 @@ import React from 'react';
 import UserSearch from './UserSearch';
 import { User } from './User';
 import { getUser } from '../services/api';
-import { showMyUsersList, publish } from '../services/storage'
+import { showMyUsersList, subscribe } from '../services/storage'
 
 
 class UserList extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      myUsers: [1,2,3]
+      myUsers: []
     }
   }
-  component
+  componentDidMount(){
+    subscribe( () => {
+      const myUsers = showMyUsersList();
+      this.setState({myUsers})
+    })
+  }
   render() {
     const title = 'User List';
     const find = 'Find user by login';

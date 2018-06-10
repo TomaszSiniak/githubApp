@@ -50,7 +50,7 @@ export const showSearchResult = () => {
 
 export const showMyUsersList = () => {
   let addMyUsers = [...myUsersList];
-  console.log('shoMyUserList()')
+
   return addMyUsers;
 }
 
@@ -58,5 +58,6 @@ export const showMyUsersList = () => {
 
 export const addUser = (user) => {
     myUsersList.push(user);
+    publish();
     console.log(myUsersList);
 }
