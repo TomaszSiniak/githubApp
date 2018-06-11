@@ -18,7 +18,6 @@ class UserSearch extends React.Component {
       });
     });
   }
-
   render() {
     return (
       <div>

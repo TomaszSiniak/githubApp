@@ -1,8 +1,8 @@
 import React from 'react';
 
-export const UserRepository = () => (
-  <div className="repo">
-    <p>Repositiory Name: </p>
-    <p>Stars: </p>
+export const UserRepository = (props) => (
+  <div className="repos_item">
+    <p>Name: {props.repo.name} </p>
+    <p>Stars: {props.repo.stargazers_count}</p>
   </div>
 )

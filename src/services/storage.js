@@ -17,9 +17,13 @@ export const subscribe = (callback) => {
 
 
 // ??????
-getLocalForage('users');
+const initialize = () => {
+  console.log('initialize()');
+  getLocalForage('users');
+  publish();
+}
 
-
+initialize();
 
 // get user from github api based on username
 export const getUsers = (e) => {
@@ -56,6 +60,7 @@ export const showSearchResult = () => {
 export const showMyUsersList = () => {
   let addMyUsers = [...myUsersList];
   return addMyUsers;
+ 
 }
 
 // add user to local Database
@@ -65,33 +70,37 @@ export const addUser = (userId) => {
   getUser(userId).then( (res) => {
     const user = {
       login: res.login,
-      created: res.created_at,
+      created: res.created_at.substring(0,10),
       id: res.id,
+      repos: []
     }
     myUsersList.push(user);
     publish();
     setLocalForage(myUsersList);
   })
 }
-
+//function to show users ropositiories
 export const showUserRepos = (login) => {
+  // get function from api and loast data
   getUserRepos(login).then( (res) => {
-    console.log(res)
+    console.log(res);
 
-    // const users = [...myUsersList];
-    // const index = users.findIndex( (user) => {
-    //   if(login === user.login){
-    //     console.log('true')
-    //   }else {
-    //     console.log('false')
-    //   } 
-    // })
-   
-    // users[index] = {
-      
-    // }
-    // myUsersList = users;
-    // publish();
-    // setLocalForage();
+    //created array and assign userList
+    const users = [...myUsersList];
+    // checking if user exist in current array and assign it to variables
+    const index = users.findIndex( (user) => {
+      if(login === user.login){
+        return true;
+      }else {
+        return false;
+      } 
+    })
+    //if user with this logo exists in our array we added to repos our API reponse
+    users[index].repos = res;
+
+    //re-assign main array
+    myUsersList = users;
+    publish();
+    setLocalForage(myUsersList);
   })
 }

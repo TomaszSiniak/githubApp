@@ -8,7 +8,12 @@ export const User = (props) => (
         <p>Login: {props.user.login}</p>
         <p>Created at: {props.user.created}</p>
         <button onClick={ () => showUserRepos(props.user.login)}>Show repos</button>
-        <button>Refresh</button>
+        <button>Refresh</button> 
+      </div>
+      <div className="repos">
+        {props.user.repos.map( (repo, key) => {
+          return <UserRepository repo={repo} key={repo.id} />
+        })}
       </div>
   </div>
 );
