@@ -2,9 +2,8 @@ import React from 'react';
 import UserSearch from './UserSearch';
 import { User } from './User';
 import { getUser } from '../services/api';
-import { showMyUsersList, subscribe } from '../services/storage';
-import localForage from 'localforage';
-import {getLocalForage } from '../services/browserStorage';
+import { showMyUsersList, subscribe, showUserRepos } from '../services/storage';
+
 
 
 
