@@ -1,25 +1,11 @@
 import React from 'react';
 import UserSearch from './UserSearch';
 import { User } from './User';
-import { getUser } from '../services/api';
-import { showMyUsersList, subscribe, showUserRepos } from '../services/storage';
-
-
+import { connect } from 'react-redux';
 
 
 class UserList extends React.Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      myUsers: []
-    }
-  }
-  componentDidMount(){
-    subscribe( () => {
-      const myUsers = showMyUsersList();
-      this.setState({myUsers});
-    });
-  }
+ 
   render() {
     const title = 'User List';
     const find = 'Find user by name';
@@ -28,11 +14,17 @@ class UserList extends React.Component {
         <h2>{find}</h2>
         <UserSearch />
         <h2>{title}</h2>
-        {this.state.myUsers.map( (user, key) => {
-          return <User key={key} user={user}/>
+        {this.props.users.map( (user, key) => {
+          return <User user={user} key={user.id}/>
         })}
       </div>
     )
   }
 }
-export default UserList;
+
+const mapStateToProps = (state) => {
+  return {
+       users: state.users
+  }
+}
+export default connect(mapStateToProps)(UserList);

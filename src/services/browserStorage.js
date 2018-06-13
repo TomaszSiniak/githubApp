@@ -11,7 +11,6 @@ export const setLocalForage = (storage) => {
 
 }
 
-
 export const getLocalForage = (storage, arr) => {
   
   localForage.getItem(storage).then((users) => {
