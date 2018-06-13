@@ -6,6 +6,7 @@ import { getLocalForage } from '../services/browserStorage';
 
 
 class UserList extends React.Component {
+  
  componentDidMount(){
    getLocalForage('users');
  }

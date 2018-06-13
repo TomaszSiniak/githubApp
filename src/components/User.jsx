@@ -6,14 +6,10 @@ import { actionUpdateUser, actionRemoveUser} from '../actions/users';
 import { setLocalForage } from '../services/browserStorage';
 
 
-
 class User extends React.Component {
 
-  loadRepos = async (login) => {
-  const result = await getUser
-  }
-  
   showUserRepos = (login) => {
+
     getUserRepos(login).then( (res) => {
       const repos = [];
         res.map( (item) => {
@@ -38,8 +34,8 @@ class User extends React.Component {
         <div className="user_data">
           <p>Login: {this.props.user.login}</p>
           <p>Created at: {this.props.user.created}</p>
-          <button onClick={ () => this.showUserRepos(this.props.user.login)} disabled={this.props.user.repos.length > 0}>Show repos</button>
-          <button onClick={ () => this.showUserRepos(this.props.user.login)} disabled={this.props.user.repos.length === 0}>Refresh</button>
+          <button onClick={ () => this.showUserRepos(this.props.user.login)}>Show repos</button>
+          <button onClick={ () => this.showUserRepos(this.props.user.login)}>Refresh</button>
           <button onClick={ () => this.removeUser(this.props.user.id)}>Remove User</button>
         </div>
         <div className="repos">
