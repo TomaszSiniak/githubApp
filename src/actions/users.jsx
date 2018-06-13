@@ -4,10 +4,12 @@ export const actionAddNewUser = (user) => ({
   user
 })
 
-export const actionRemoveUser = () => ({
-  type: 'REMOVE_USER'
+export const actionRemoveUser = (id) => ({
+  type: 'REMOVE_USER',
+  id
 })
 
-export const ActionEditUser = () => ({
-  type: 'EDIT_USER'
-})
+export const actionUpdateUser = (updates) => ({
+  type: 'UPDATE_USER',
+  updates
+});

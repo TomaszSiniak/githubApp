@@ -6,7 +6,6 @@ import { actionAddNewUser } from '../actions/users';
 
 class UserSearch extends React.Component {
 
-
   checkUsersResult = async (e) => {
     e.preventDefault();
     let query = e.target.elements.userName.value;

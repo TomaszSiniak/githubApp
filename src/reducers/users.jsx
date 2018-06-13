@@ -10,9 +10,16 @@ export default function usersReducer(state = users, action){
       action.user
     ]
     case 'REMOVE_USER':
-      return
+    console.log(state);
+      return state.filter( (id) => id !==action.id)
+
     case 'UPDATE_USER':
-      return
+    console.log(state);
+      return state.map ( (user) => {
+        if(user.id === action.id){
+          console.log('correct')
+        }
+      })
     default:
       return state;
   }

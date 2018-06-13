@@ -1,11 +1,10 @@
 import React from 'react';
 import UserSearch from './UserSearch';
-import { User } from './User';
+import User from './User';
 import { connect } from 'react-redux';
 
 
 class UserList extends React.Component {
- 
   render() {
     const title = 'User List';
     const find = 'Find user by name';
