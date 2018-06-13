@@ -8,6 +8,8 @@ export default function searchReducer(state = searchResult, action){
         ...state,
         action.user
       ]
+    case "CLEAR_ARRAY":
+      return []
     default:
       return state;
   }
