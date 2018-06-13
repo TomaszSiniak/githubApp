@@ -1,8 +1,6 @@
 import localForage from 'localforage';
 
 
-
-
 export const setLocalForage = (storage) => {
 
   localForage.setItem('users', storage).then((val) => {
@@ -11,11 +9,9 @@ export const setLocalForage = (storage) => {
 
 }
 
-export const getLocalForage = (storage, arr) => {
+export const getLocalForage = (storage) => {
   
   localForage.getItem(storage).then((users) => {
     console.log('properly get data from local Forage');
-    users.map( (user) => {arr.push(user)})
-  })
-  .catch(err => console.log('problem with getting local forage: ' + err))
+  }).catch(err => console.log('problem with getting local forage: ' + err))
 }

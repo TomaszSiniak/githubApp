@@ -4,20 +4,22 @@ const users = [];
 export default function usersReducer(state = users, action){
   switch (action.type) {
     case 'ADD_USER':
-    console.log(state);
-    return [
-      ...state,
-      action.user
-    ]
+    console.log(state, action);
+      return [
+        ...state,
+        action.user
+      ]
     case 'REMOVE_USER':
-    console.log(state);
-      return state.filter( (id) => id !==action.id)
-
+    console.log(state, action);
+      return state.filter( user => user.id !== action.id)
     case 'UPDATE_USER':
-    console.log(state);
+    console.log(state,action);
       return state.map ( (user) => {
-        if(user.id === action.id){
-          console.log('correct')
+        if(user.login === action.login){
+          return {
+           ...user,
+           ...action.updates
+          }
         }
       })
     default:

@@ -3,6 +3,7 @@ import  { connect } from 'react-redux';
 import { searchUser, getUser } from '../services/api';
 import { actionSearchUsers } from '../actions/search';
 import { actionAddNewUser } from '../actions/users';
+import { setLocalForage } from '../services/browserStorage';
 
 class UserSearch extends React.Component {
 
@@ -22,7 +23,6 @@ class UserSearch extends React.Component {
       this.props.dispatch(actionSearchUsers(user));
     })
   }
-
   addUser = async (id) => {
     await getUser(id).then( (res) => {
       const user = {
@@ -32,6 +32,7 @@ class UserSearch extends React.Component {
         repos: []
       }
       this.props.dispatch(actionAddNewUser(user));
+      setLocalForage(this.props.users);
     })
   }
   render() {

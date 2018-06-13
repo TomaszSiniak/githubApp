@@ -2,7 +2,8 @@ import React from 'react';
 import { UserRepository } from './UserRepositiory';
 import { connect } from 'react-redux';
 import { getUserRepos } from '../services/api';
-import { actionUpdateUser} from '../actions/users';
+import { actionUpdateUser, actionRemoveUser} from '../actions/users';
+import { setLocalForage } from '../services/browserStorage';
 
 
 
@@ -14,14 +15,21 @@ class User extends React.Component {
   
   showUserRepos = (login) => {
     getUserRepos(login).then( (res) => {
-      res.map( (item) => {
-        const repo = {
-          name: item.name,
-          stars: item.stargazers_count
-        }
-      })
-      console.log(res);
+      const repos = [];
+        res.map( (item) => {
+          const repo = {
+            name: item.name,
+            stars: item.stargazers_count
+          }
+          repos.push(repo)
+        })
+        console.log(repos)
+      this.props.dispatch(actionUpdateUser(repos))
     })
+  }
+  removeUser = (id) => {
+    this.props.dispatch(actionRemoveUser(id))
+    setLocalForage(this.props.users);
   }
 
   render() {
@@ -32,7 +40,7 @@ class User extends React.Component {
           <p>Created at: {this.props.user.created}</p>
           <button onClick={ () => this.showUserRepos(this.props.user.login)} disabled={this.props.user.repos.length > 0}>Show repos</button>
           <button onClick={ () => this.showUserRepos(this.props.user.login)} disabled={this.props.user.repos.length === 0}>Refresh</button>
-          <button>Remove User</button>
+          <button onClick={ () => this.removeUser(this.props.user.id)}>Remove User</button>
         </div>
         <div className="repos">
           {this.props.user.repos.map((repo, key) => {
@@ -44,9 +52,5 @@ class User extends React.Component {
   }
 };
 
-const mapStateToProps = (state) => {
-  return {
-    users: state.users
-  }
-}
-export default connect(mapStateToProps)(User);
+
+export default connect()(User);
