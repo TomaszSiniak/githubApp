@@ -9,7 +9,13 @@ export const actionRemoveUser = (id) => ({
   id
 })
 
-export const actionUpdateUser = (updates) => ({
-  type: 'UPDATE_USER',
-  updates
+export const actionGetRepos = (login, repos) => ({
+  type: 'GET_USER_REPOS',
+  login,
+  repos
 });
+export const actionSetUsers = (users) => ({
+  type: 'SET_USERS',
+  users
+})
+

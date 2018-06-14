@@ -1,5 +1,4 @@
 
-// 
 export const searchUser = async (query) => {
   try {
     const request = await fetch(`https://api.github.com/search/users?q=${query}`);

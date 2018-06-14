@@ -1,6 +1,6 @@
 const searchResult= [];
 
-export default function searchReducer(state = searchResult, action){
+function searchReducer(state = searchResult, action){
   switch(action.type){
     case "SEARCH_USERS":
       // console.log('arsafgsg', state, action);
@@ -14,3 +14,5 @@ export default function searchReducer(state = searchResult, action){
       return state;
   }
 }
+
+export default searchReducer;

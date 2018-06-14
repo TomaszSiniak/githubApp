@@ -3,14 +3,21 @@ import UserSearch from './UserSearch';
 import User from './User';
 import { connect } from 'react-redux';
 import { getLocalForage } from '../services/browserStorage';
-
+import { actionSetUsers } from '../actions/users';
 
 class UserList extends React.Component {
   
- componentDidMount(){
-   getLocalForage('users');
- }
+  componentDidMount(){
+    getLocalForage('users').then((users) => {
+      this.props.dispatch(actionSetUsers(users));
+    })
+ 
+  }
   render() {
+    if (!this.props.users) {
+      return <div>Loading...</div>;
+    }
+    console.log("RENDERUJE", this.props.users);
     const title = 'User List';
     const find = 'Find user by name';
     return (

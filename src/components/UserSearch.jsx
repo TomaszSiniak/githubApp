@@ -39,6 +39,7 @@ class UserSearch extends React.Component {
       })
      
     })
+    //clear input
     e.target.elements.userName.value= '';
   }
   
@@ -71,11 +72,11 @@ class UserSearch extends React.Component {
   }
 }
 
+
 const mapStateToProps = (state) => {
   return {
     search: state.search,
     users: state.users
   }
 }
-
 export default connect(mapStateToProps)(UserSearch);
