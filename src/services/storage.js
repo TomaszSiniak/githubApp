@@ -16,10 +16,11 @@ export const subscribe = (callback) => {
 
 const initialize = () => {
   
-  getLocalForage('users', myUsersList);
-  publish();
-  console.log('initialize()')
-  console.log(myUsersList)
+  getLocalForage('users').then( (res) => {
+    myUsersList = res;
+    console.log(myUsersList);
+    publish();
+  })
 }
 initialize();
 

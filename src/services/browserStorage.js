@@ -12,11 +12,11 @@ export const setLocalForage = (storage) => {
 }
 
 
-export const getLocalForage = (storage, arr) => {
+export const getLocalForage = (storage) => {
   
-  localForage.getItem(storage).then((users) => {
+  return localForage.getItem(storage).then((users) => {
     console.log('properly get data from local Forage');
-    users.map( (user) => {arr.push(user)})
+    return users;
   })
   .catch(err => console.log('problem with getting local forage: ' + err))
 }
