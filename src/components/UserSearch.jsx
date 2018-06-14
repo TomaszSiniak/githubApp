@@ -1,33 +1,40 @@
 import React from 'react';
-import { getUsers, subscribe, showSearchResult, addUser } from '../services/storage';
+import  { observer } from 'mobx-react';
+import { searchUser } from '../services/api';
 
-
-
+@observer
 class UserSearch extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      searchResult: []
-    }
+
+  searchQuery = (e) => {
+
+    e.preventDefault()
+    const query = e.target.elements.userName.value.trim()
+
+    searchUser(query).then((res) => {
+      const users = []
+      res.items.map( (item) => {
+        const user = {
+          login: item.login,
+          id: item.id
+        }
+        users.push(user)
+      })
+      console.log(users)
+    })
+
+    e.target.elements.userName.value = ''
   }
-  componentDidMount() {
-    subscribe(() => {
-      const searchResult = showSearchResult();
-      this.setState({
-        searchResult
-      });
-    });
-  }
+
+
   render() {
     return (
       <div>
-        <form onSubmit={(e) => getUsers(e)}>
+        <form onSubmit={this.searchQuery}>
           <input name="userName" />
           <button>Search</button>
         </form>
-        {this.state.searchResult.length > 0 && <p className="result-title">Your results: </p>}
-        {this.state.searchResult.map((user, key) => {
-          return <p onClick={ () => addUser(user.id)} className="users-list-result_item" key={key}>{user.login}</p>
+        {this.props.store.searchResults.map((user, key) => {
+          return <p className="users-list-result_item" key={key}>{user}</p>
         })}
       </div>
     )
