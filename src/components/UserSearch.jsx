@@ -1,7 +1,8 @@
-import React from 'react';
-import  { observer } from 'mobx-react';
-import { searchUser } from '../services/api';
+import React from 'react'
+import { searchUser } from '../services/api'
+import { inject, observer } from 'mobx-react'
 
+@inject('store')
 @observer
 class UserSearch extends React.Component {
 
@@ -9,7 +10,6 @@ class UserSearch extends React.Component {
 
     e.preventDefault()
     const query = e.target.elements.userName.value.trim()
-
     searchUser(query).then((res) => {
       const users = []
       res.items.map( (item) => {
@@ -17,14 +17,12 @@ class UserSearch extends React.Component {
           login: item.login,
           id: item.id
         }
-        users.push(user)
+        this.props.store.searchUsers(user)
       })
-      console.log(users)
     })
 
     e.target.elements.userName.value = ''
   }
-
 
   render() {
     return (
@@ -33,8 +31,9 @@ class UserSearch extends React.Component {
           <input name="userName" />
           <button>Search</button>
         </form>
+        {this.props.store.searchResults.length > 0 && <p className="result-title">Your results: </p>}
         {this.props.store.searchResults.map((user, key) => {
-          return <p className="users-list-result_item" key={key}>{user}</p>
+          return <p className="users-list-result_item" key={key}>{user.login}</p>
         })}
       </div>
     )

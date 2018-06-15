@@ -1,8 +1,12 @@
-import { observable } from 'mobx'
+import { observable, action } from 'mobx'
 
 class UserStore {
-  @observable searchResults = ['ok', 'dupa', 'dzida']
+  @observable searchResults = []
   @observable users = ['john', 'tom', 'us']
+
+  @action searchUsers = (user) => {
+    this.searchResults.push(user)
+  }
 }
 
 const store = new UserStore
