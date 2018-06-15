@@ -12,18 +12,17 @@ class UserStore {
     this.users.push(user)
   }
   @action removeUserFromStore = (id) => {
-    this.users.filter( user => user.id !== id )
+    const user = this.users.find( user => user.id === id )
+    this.users.remove(user)
   }
   @action loadRepos = (login, repos) => {
     this.users.map ((user) => {
       if(login === user.login){
         user.repos = repos
-        console.log('repos added')
       } 
     })
   }
 }
-
 
 const store = new UserStore
 

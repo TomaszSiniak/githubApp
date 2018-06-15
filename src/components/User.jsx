@@ -4,6 +4,7 @@ import { inject, observer } from 'mobx-react'
 import { getRepos }  from '../services/api'
 import { setLocalForage } from '../services/browserStorage'
 
+
 @inject('store')
 @observer
 class User extends React.Component {
@@ -14,12 +15,14 @@ class User extends React.Component {
   }
   
   showUserRepository = (login) => {
+
     getRepos(login).then( (res) => {
       const repos = [];
       res.map( (item) => {
         const repo = {
           name: item.name,
-          stars: item.stargazers_count
+          stars: item.stargazers_count,
+          id: item.id
         }
         repos.push(repo)
       })
