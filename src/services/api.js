@@ -21,7 +21,7 @@ export const getUser = async (id) => {
   }
 }
 
-export const getUserRepos = async (login) => {
+export const getRepos = async (login) => {
   try{
     const request = await fetch(`https://api.github.com/users/${login}/repos`);
     const data = await request.json();

@@ -1,6 +1,8 @@
 import React from 'react'
 import { searchUser } from '../services/api'
 import { inject, observer } from 'mobx-react'
+import { getUser } from '../services/api' 
+import { setLocalForage } from '../services/browserStorage'
 
 @inject('store')
 @observer
@@ -11,7 +13,7 @@ class UserSearch extends React.Component {
     e.preventDefault()
     const query = e.target.elements.userName.value.trim()
     searchUser(query).then((res) => {
-      const users = []
+
       res.items.map( (item) => {
         const user = {
           login: item.login,
@@ -24,6 +26,19 @@ class UserSearch extends React.Component {
     e.target.elements.userName.value = ''
   }
 
+  addUser = (id) => {
+    
+    getUser(id). then( (res) => {
+
+      const user = {
+        login: res.login,
+        id: res.id,
+        created: res.created_at.substr(0,10),
+        repos:[]
+      }
+      this.props.store.addUserToStore(user)
+    })
+  }
   render() {
     return (
       <div>
@@ -33,7 +48,14 @@ class UserSearch extends React.Component {
         </form>
         {this.props.store.searchResults.length > 0 && <p className="result-title">Your results: </p>}
         {this.props.store.searchResults.map((user, key) => {
-          return <p className="users-list-result_item" key={key}>{user.login}</p>
+          return <p 
+            key= { user.id } 
+            user= { user } 
+            onClick= { () => this.addUser(user.id) } 
+            className="users-list-result_item" 
+            >
+            { user.login }
+          </p>
         })}
       </div>
     )
