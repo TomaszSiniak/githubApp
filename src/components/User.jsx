@@ -13,7 +13,7 @@ class User extends React.Component {
    this.props.store.removeUserFromStore(idToRemove)
    
   }
-  
+
   showUserRepository = (login) => {
 
     getRepos(login).then( (res) => {
@@ -42,6 +42,7 @@ class User extends React.Component {
           <button onClick= {() => this.removeUser(this.props.user.id)}>Remove User</button>
         </div>
         <div className="repos">
+          {this.props.user.repos == 0 && <p>This user has no repositories, Click show repos to check</p>}
           {this.props.user.repos.map( (repo, key) => {
           return <UserRepository repo={repo} key={repo.id} />
         })}

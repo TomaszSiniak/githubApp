@@ -3,10 +3,15 @@ import UserSearch from './UserSearch'
 import { inject, observer } from 'mobx-react'
 import  User  from './User'
 import { getUser } from '../services/api'
+import { getLocalForage } from '../services/browserStorage'
 
 @inject('store')
 @observer
 class UserList extends React.Component {
+
+  componentDidMount(){
+    this.props.store.setUsers();
+  }
   render() {
     const title = 'User List'
     const find = 'Find user by name'

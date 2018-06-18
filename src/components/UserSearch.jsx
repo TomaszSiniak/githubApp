@@ -9,11 +9,11 @@ import { setLocalForage } from '../services/browserStorage'
 class UserSearch extends React.Component {
 
   searchQuery = (e) => {
-
+    
     e.preventDefault()
     const query = e.target.elements.userName.value.trim()
     searchUser(query).then((res) => {
-
+      
       res.items.map( (item) => {
         const user = {
           login: item.login,
@@ -27,15 +27,14 @@ class UserSearch extends React.Component {
   }
 
   addUser = (id) => {
-    
     getUser(id). then( (res) => {
-
       const user = {
         login: res.login,
         id: res.id,
         created: res.created_at.substr(0,10),
         repos:[]
       }
+      
       this.props.store.addUserToStore(user)
     })
   }
