@@ -2,6 +2,7 @@ import React from 'react'
 import UserSearch from './UserSearch'
 import { inject, observer } from 'mobx-react'
 import  User  from './User'
+import  UserDetails  from './UserDetails'
 import { getUser } from '../services/api'
 import { getLocalForage } from '../services/browserStorage'
 
@@ -16,13 +17,15 @@ class UserList extends React.Component {
     const title = 'User List'
     const find = 'Find user by name'
     return (
+      <div className="wrapper">
       <div className="container">
         <h2>{find}</h2>
         <UserSearch/>
         <h2>{title}</h2>
         {this.props.store.users.map( (user, key) => {
-          return <User key={user.id} user={user}/>
+          return <User key={user.id} user={user} />
         })}
+      </div>
       </div>
     )
   }

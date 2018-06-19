@@ -1,5 +1,6 @@
 import { observable, action, toJS } from 'mobx'
 import { setLocalForage, getLocalForage } from '../services/browserStorage'
+import UserDetails from '../components/UserDetails';
 
 class UserStore {
   @observable searchResults = []
@@ -7,12 +8,12 @@ class UserStore {
 
   @action searchUsers = (user) => {
     this.searchResults.push(user)
-    
   }
 
   @action addUserToStore = (user) => {
     this.users.push(user)
     setLocalForage(toJS(this.users));
+    console.log('addUser()')
   }
 
   @action removeUserFromStore = (id) => {
@@ -29,6 +30,19 @@ class UserStore {
       setLocalForage(toJS(this.users));
     })
   }
+
+  @action userDetails = (id, avatar, type, followers) => {
+    this.users.map( (user) => {
+      if(id === user.id){
+       user.avatar = avatar
+       user.type = type
+       user.followers = followers
+      }
+      console.log('userDetails()')
+      setLocalForage(toJS(this.users));
+    })
+  }
+
 
   @action setUsers = () => {
     getLocalForage('users').then( (res) => {

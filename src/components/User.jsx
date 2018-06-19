@@ -1,8 +1,10 @@
 import React from 'react'
 import { UserRepository } from './UserRepositiory'
 import { inject, observer } from 'mobx-react'
-import { getRepos }  from '../services/api'
+import { getRepos, getUser }  from '../services/api'
 import { setLocalForage } from '../services/browserStorage'
+import { Link } from 'react-router-dom'
+import UserDetails from './UserDetails'
 
 
 @inject('store')
@@ -31,11 +33,26 @@ class User extends React.Component {
     })
   }
 
+  showUserDetails = (id) => {
+    getUser(id).then( (res) => {
+      const avatar = res.avatar_url;
+      const type = res.type;
+      const followers = res.followers;
+
+      this.props.store.userDetails(id, avatar, type, followers)
+    })
+  }
+
   render() {
     return (
       <div className="user">
         <div className="user_data">
-          <p>Login: {this.props.user.login}</p>
+          <div>Login: 
+            <Link 
+              to={`/list/user/${this.props.user.id}`} 
+              onClick={() => this.showUserDetails(this.props.user.id)}> {this.props.user.login}
+            </Link>
+          </div>
           <p>Created at: {this.props.user.created}</p>
           <button onClick = { () => this.showUserRepository(this.props.user.login)}>Show repos</button>
           <button>Refresh</button>
